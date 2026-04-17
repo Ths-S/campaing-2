@@ -1,0 +1,28 @@
+HTTrack3.49-2+htsswf+htsjava launched on Fri, 17 Apr 2026 13:38:46 at https://www.cursomanicure.com/alongamento-combo/?ref=H105423369K +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.1) Gecko/20020826" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://www.cursomanicure.com/alongamento-combo/?ref=H105423369K -O1 "C:\My Web Sites\Negocio de unha" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/a.href (from https://www.cursomanicure.com/alongamento-combo/?ref=H105423369K)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/social_icons/facebook_16.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/social_icons/digg_16.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/social_icons/twitter_16.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/social_icons/delicious_16.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/social_icons/reddit_16.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/social_icons/google_plus_16.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:13	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/Total/owl.video.play.png (from https://www.cursomanicure.com/wp-content/themes/Total/style.css?ver=4.4.1)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/wp-content/themes/Total/assets/images/bullets-black.png (from https://www.cursomanicure.com/wp-content/themes/Total/assets/css/wpex-visual-composer-extend.css?ver=4.4.1)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/signals/config/ (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/signals/plugins/ (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/schema.org/ (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/t.resolvedLink (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/signals/iwl.js (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/signals/iwl.js?pixel_id= (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/n.dl (from https://connect.facebook.net/en_US/fbevents.js)
+13:40:14	Error: 	"Not Found" (404) at link https://www.cursomanicure.com/alongamento-combo/n.rl (from https://connect.facebook.net/en_US/fbevents.js)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 28 seconds : 139 links scanned, 121 files written (5641945 bytes overall) [2527606 bytes received at 28722 bytes/sec], 5292223 bytes transferred using HTTP compression in 66 files, ratio 25%, 14.3 requests per connection
+(17 errors, 0 warnings, 0 messages)
