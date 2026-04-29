@@ -1,28 +1,54 @@
 export async function onRequestPost(context) {
-  const body = await context.request.json()
+  try {
+    const body = await context.request.json()
 
-  const nome = body.nome
-  const telefone = body.telefone
+    const nome = body.nome
+    const telefone = body.telefone
 
-  // 1 salvar no sheets
-  await salvarNoSheets(nome, telefone)
+    await salvarNoSheets(nome, telefone, context)
+    await enviarWhatsapp(nome, telefone, context)
 
-  // 2 enviar whatsapp
-  await enviarWhatsapp(nome, telefone)
+    return new Response(
+      JSON.stringify({ ok: true }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      }
+    )
 
-  return new Response("ok")
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      }
+    )
+  }
 }
 
-function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Leads")
+async function salvarNoSheets(nome, telefone, context) {
+  await fetch(context.env.SHEETS_WEBHOOK_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      nome,
+      telefone
+    })
+  })
+}
 
-  const data = JSON.parse(e.postData.contents)
-
-  sheet.appendRow([
-    new Date(),
-    data.nome,
-    data.telefone
-  ])
-
-  return ContentService.createTextOutput("OK")
+async function enviarWhatsapp(nome, telefone, context) {
+  await fetch("https://api.z-api.io/instances/SEU_ID/token/SEU_TOKEN/send-text", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      phone: "5531999999999",
+      message: `Novo lead:\nNome: ${nome}\nTelefone: ${telefone}`
+    })
+  })
 }
