@@ -1,0 +1,21 @@
+<form id="leadForm">
+  <input name="nome" required>
+  <input name="telefone" required>
+  <button>Enviar</button>
+</form>
+
+<script>
+document.getElementById("leadForm").onsubmit = async (e)=>{
+ e.preventDefault()
+
+ const data = Object.fromEntries(new FormData(e.target))
+
+ await fetch("/api/lead", {
+   method:"POST",
+   headers:{ "Content-Type":"application/json" },
+   body: JSON.stringify(data)
+ })
+
+ alert("Enviado")
+}
+</script>
