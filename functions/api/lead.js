@@ -1,12 +1,16 @@
 export async function onRequestPost(context) {
   try {
-    const body = await context.request.json()
+    const body = await context.request.json();
 
-    const nome = body.nome
-    const telefone = body.telefone
+    const nome = body.nome;
+    const email = body.email;
+    const telefone = body.telefone;
 
-    await salvarNoSheets(nome, telefone, context)
-    await enviarWhatsapp(nome, telefone, context)
+    // Roda as duas funções em paralelo para ser mais rápido
+    await Promise.all([
+      salvarNoSheets(nome, email, telefone, context),
+      enviarTelegram(nome, email, telefone, context)
+    ]);
 
     return new Response(
       JSON.stringify({ ok: true }),
@@ -14,7 +18,7 @@ export async function onRequestPost(context) {
         status: 200,
         headers: { "Content-Type": "application/json" }
       }
-    )
+    );
 
   } catch (error) {
     return new Response(
@@ -23,32 +27,32 @@ export async function onRequestPost(context) {
         status: 500,
         headers: { "Content-Type": "application/json" }
       }
-    )
+    );
   }
 }
 
-async function salvarNoSheets(nome, telefone, context) {
+async function salvarNoSheets(nome, email, telefone, context) {
   await fetch(context.env.SHEETS_WEBHOOK_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      nome,
-      telefone
-    })
-  })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, email, telefone })
+  });
 }
 
-async function enviarWhatsapp(nome, telefone, context) {
-  await fetch("https://api.z-api.io/instances/SEU_ID/token/SEU_TOKEN/send-text", {
+// Substituímos o WhatsApp pelo Telegram (100% Grátis)
+async function enviarTelegram(nome, email, telefone, context) {
+  const botToken = context.env.TELEGRAM_BOT_TOKEN;
+  const chatId = context.env.TELEGRAM_CHAT_ID;
+  
+  const mensagem = `🚨 *Novo Lead Recebido!*\n\n*Nome:* ${nome}\n*E-mail:* ${email}\n*Telefone:* ${telefone}`;
+
+  await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      phone: "5531999999999",
-      message: `Novo lead:\nNome: ${nome}\nTelefone: ${telefone}`
+      chat_id: chatId,
+      text: mensagem,
+      parse_mode: "Markdown"
     })
-  })
+  });
 }

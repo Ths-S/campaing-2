@@ -1,21 +1,59 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-SEU_ID_DO_ADS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // Habilita as conversões otimizadas
+  gtag('config', 'AW-SEU_ID_DO_ADS', { 'allow_enhanced_conversions': true });
+</script>
+
 <form id="leadForm">
-  <input name="nome" required>
-  <input name="telefone" required>
-  <button>Enviar</button>
+  <input name="nome" type="text" required placeholder="Seu Nome">
+  <input name="email" type="email" required placeholder="Seu E-mail">
+  <input name="telefone" type="tel" required placeholder="Telefone (com DDD)">
+  <button type="submit">Enviar</button>
 </form>
 
 <script>
-document.getElementById("leadForm").onsubmit = async (e)=>{
- e.preventDefault()
+document.getElementById("leadForm").onsubmit = async (e) => {
+  e.preventDefault();
+  
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form));
 
- const data = Object.fromEntries(new FormData(e.target))
+  try {
+    // 1. Envia para o Cloudflare Pages
+    const response = await fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
- await fetch("/api/lead", {
-   method:"POST",
-   headers:{ "Content-Type":"application/json" },
-   body: JSON.stringify(data)
- })
+    if (response.ok) {
+      // 2. Avisa o Google Ads (Conversão Otimizada)
+      // O Google usa esses dados para cruzar com contas logadas e melhorar a campanha
+      gtag('set', 'user_data', {
+        "email": data.email,
+        "phone_number": "+55" + data.telefone.replace(/\D/g, ''), // Google exige código do país
+        "address": {
+          "first_name": data.nome.split(' ')[0], // Pega o primeiro nome
+          "last_name": data.nome.split(' ').slice(1).join(' ') || '' // Pega o sobrenome
+        }
+      });
 
- alert("Enviado")
+      // Dispara o evento de conversão
+      gtag('event', 'conversion', {
+          'send_to': 'AW-SEU_ID_DO_ADS/SUA_LABEL_DE_CONVERSAO'
+      });
+
+      alert("Formulário enviado com sucesso!");
+      form.reset();
+    } else {
+      alert("Erro ao enviar. Tente novamente.");
+    }
+  } catch (error) {
+    console.error("Erro:", error);
+  }
 }
 </script>
